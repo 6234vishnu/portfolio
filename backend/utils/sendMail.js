@@ -1,10 +1,9 @@
-// backend/utils/sendEmail.js
 import nodemailer from "nodemailer";
 
 export const sendEmail = async ({ from, subject, text }) => {
   try {
     const transporter = nodemailer.createTransport({
-      service: "gmail", // or use smtp
+      service: "gmail",
       auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASS,
@@ -13,7 +12,7 @@ export const sendEmail = async ({ from, subject, text }) => {
 
     const mailOptions = {
       from,
-      to: process.env.MAIL_USER, 
+      to: process.env.MAIL_USER,
       subject,
       text,
     };

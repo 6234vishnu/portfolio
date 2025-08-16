@@ -14,7 +14,7 @@ export const sendMessage = async (req, res) => {
 
   try {
     const { firstName, lastName, email, message } = req.body;
-    
+
     const mailResponse = await sendEmail({
       from: email,
       subject: `New Contact form your portfolio submitted by ${firstName} ${lastName}`,
