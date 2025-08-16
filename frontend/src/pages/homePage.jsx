@@ -7,12 +7,12 @@ import Projects from "../components/projects";
 import ExpirenceAndCertificates from "../components/expirenceAndCertificates";
 import Contacts from "../components/contacts";
 import About from "../components/about";
+import api from "../api/axiosInstance";
 
 const HomePage = () => {
-
-  const handleScroll=(id)=>{
-    document.getElementById(id)?.scrollIntoView({behavior:"smooth"})
-  }
+  const handleScroll = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
   useEffect(() => {
     AOS.init({
       duration: 2000,
@@ -20,16 +20,31 @@ const HomePage = () => {
     });
   }, []);
 
+  useEffect(() => {
+    const startServer = async () => {
+      // render will take few mins to start their server so sending a dummy req to start server the time page opend
+
+      await api.get("/api/startServer");
+    };
+    startServer();
+  }, []);
+
   return (
     <>
       <NavBar onScrollTo={handleScroll} />
       <div className="bg-white text-black w-screen">
-        <section id="about" className="bg-white text-black w-screen px-4 py-10 shadow-lg">
-          <About onScrollTo={handleScroll}/>
+        <section
+          id="about"
+          className="bg-white text-black w-screen px-4 py-10 shadow-lg"
+        >
+          <About onScrollTo={handleScroll} />
         </section>
 
-        <section id="skills" className="bg-white text-black w-screen flex flex-col items-center justify-center py-16 px-4">
-           <Skills />
+        <section
+          id="skills"
+          className="bg-white text-black w-screen flex flex-col items-center justify-center py-16 px-4"
+        >
+          <Skills />
         </section>
 
         <section id="projects" className="px-4">
